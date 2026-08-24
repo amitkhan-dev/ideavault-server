@@ -8,13 +8,27 @@ export const getAuth = () => {
   if (!authInstance) {
     authInstance = betterAuth({
       database: mongodbAdapter(getDb()),
+
       secret: process.env.BETTER_AUTH_SECRET,
-      baseURL: process.env.BETTER_AUTH_URL || 'http://localhost:5000',
+
+      baseURL: process.env.BETTER_AUTH_URL || 'http://localhost:3000',
+
       emailAndPassword: {
         enabled: true,
       },
-      trustedOrigins: [process.env.CLIENT_URL || 'http://localhost:3000'],
+
+      socialProviders: {
+        google: {
+          clientId: process.env.GOOGLE_CLIENT_ID,
+          clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        },
+      },
+
+      trustedOrigins: [
+        process.env.CLIENT_URL || 'http://localhost:3000',
+      ],
     });
   }
+
   return authInstance;
 };
