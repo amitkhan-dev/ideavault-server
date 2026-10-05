@@ -36,5 +36,34 @@ router.post('/', async (req, res) => {
   }
 });
 
+// GET: All Ideas
+router.get('/', async (req, res) => {
+  try {
+    const db = getDb();
+    const ideas = await db.collection('ideas').find().toArray();
+    sendSuccess(res, 200, 'Ideas fetched successfully', ideas);
+  } catch (error) {
+    sendError(res, 500, error.message);
+  }
+});
+
+// GET: Trending Ideas (Limit 6)
+router.get('/trending', async (req, res) => {
+  try {
+    const db = getDb();
+    const trending = await db
+      .collection('ideas')
+      .find()
+      .sort({ createdAt: -1 })
+      .limit(6)
+      .toArray();
+
+    sendSuccess(res, 200, 'Trending ideas fetched successfully', trending);
+  } catch (error) {
+    sendError(res, 500, error.message);
+  }
+});
+
+
 
 export default router;
