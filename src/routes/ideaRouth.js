@@ -124,7 +124,7 @@ router.get('/top-contributors', async (req, res) => {
   }
 });
 
-// GET: Ideas posted by a specific user (For My Ideas page)
+// GET: Ideas posted by a specific user 
 router.get('/user/:email', async (req, res) => {
   try {
     const db = getDb();
@@ -145,7 +145,6 @@ router.get('/:id', async (req, res) => {
   try {
     const db = getDb();
     const { id } = req.params;
-
     console.log('Requested ID:', id);
 
     let idea = null;
