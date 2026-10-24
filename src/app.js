@@ -14,7 +14,10 @@ const app = express();
 // Middlewares
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'https://ideavaults.vercel.app/',
+    origin: [
+    'http://localhost:3000',
+    'https://ideavaults.vercel.app',
+  ],
     credentials: true,
   })
 );
