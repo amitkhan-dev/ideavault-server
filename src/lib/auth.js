@@ -23,10 +23,12 @@ export const getAuth = () => {
           clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         },
       },
+      
+trustedOrigins: [
+  'http://localhost:3000',
+  'https://ideavaults.vercel.app',
+],
 
-      trustedOrigins: [
-        process.env.CLIENT_URL || 'http://localhost:3000',
-      ],
     });
   }
 
